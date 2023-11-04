@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/dashboard"
+        android:icon="@drawable/baseline_list_24"
+        android:title=" "
+       />
+    <item
+        android:id="@+id/newtrip"
+        android:icon="@drawable/baseline_add_to_photos_24"
+        android:title=" "
+       />
+    <item
+        android:id="@+id/edit"
+        android:icon="@drawable/baseline_lock_reset_24"
+        android:title=" "
+       />
+</menu>
