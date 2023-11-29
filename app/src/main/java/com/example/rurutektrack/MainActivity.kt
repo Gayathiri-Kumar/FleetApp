@@ -41,7 +41,9 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.content.FileProvider
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.textfield.TextInputLayout
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -83,12 +85,13 @@ class MainActivity : AppCompatActivity() {
         val receivedvehicle = sharedPreferences.getString("model", null)
         val receivedprevious = sharedPreferences.getString("max_end_km", null)
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.blue))
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
-        val colorBlueLight = ContextCompat.getColor(this, R.color.darkgrey)
-        val colorBlueDark = ContextCompat.getColor(this, R.color.blue)
-        bottomNavigationView.setBackgroundColor(colorBlueDark)
-        bottomNavigationView.itemActiveIndicatorColor = ColorStateList.valueOf(colorBlueLight)
         supportActionBar?.hide()
+
+        val colorStateList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.blue))
+        val InputLayout: TextInputLayout = findViewById(R.id.edit1)
+        InputLayout.boxStrokeColor = ContextCompat.getColor(this, R.color.blue)
+        InputLayout.placeholderTextColor= colorStateList
+        InputLayout.defaultHintTextColor=colorStateList
 
         mod = findViewById(R.id.model)
         skm = findViewById(R.id.startkm)
@@ -127,55 +130,28 @@ class MainActivity : AppCompatActivity() {
             val previous1 = previous.toInt()
             if ((previous1 == 0) && (!startkm.isNullOrEmpty())) {
                 uploadData(model, startkm, user)
-            }
-            else if (previous1 != 0){
+            } else if (previous1 != 0) {
                 try {
                     val startkm1 = startkm.toInt()
 
                     if (startkm1 == previous1) {
                         uploadData(model, startkm, user)
-                    }
-                    else if (startkm1 == previous1 + 1) {
+                    } else if (startkm1 == previous1 + 1) {
                         // Conditions met, proceed to upload data
                         uploadData(model, startkm, user)
                     } else {
-                        skm.error = "Start KM must be equal to the previous value"
+                        skm.error = "Start KM must be equal to the current Km"
                     }
-                }
-
-                catch (e: NumberFormatException) {
+                } catch (e: NumberFormatException) {
                     // Handle the case where startkm is not a valid integer
                     skm.error = "Invalid Start KM"
                 }
-            }
-            else {
+            } else {
                 skm.error = "Start KM is required"
 
             }
         }
-        bottomNavigationView.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.dashboard -> {
-                    startActivity(Intent(applicationContext, DashboardActivity::class.java))
-                    finish()
-                    true
-                }
-                R.id.newtrip -> {
-                    startActivity(Intent(applicationContext, Newtrip::class.java))
-                    finish()
-                    true
-                }
-
-                R.id.edit -> {
-                    startActivity(Intent(applicationContext, ChangePassword::class.java))
-                    finish()
-                    true
-                }
-                else -> false
-            }
-        }
     }
-
     private fun uploadData(model: String, startkm: String, user: String) {
         if (selectedImageBitmap != null) {
             GlobalScope.launch(Dispatchers.IO) {

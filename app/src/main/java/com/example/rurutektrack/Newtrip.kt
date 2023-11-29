@@ -5,13 +5,19 @@ import android.content.SharedPreferences
 import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.util.Log
+import android.view.View
 import android.widget.AutoCompleteTextView
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.lifecycleScope
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
@@ -33,6 +39,13 @@ class Newtrip : AppCompatActivity() {
     private lateinit var scan_btn: Button
     private lateinit var submit: Button
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var bottomNavigation: MeowBottomNavigation
+    private lateinit var scannerLayout: RelativeLayout
+    private lateinit var imageView1: ImageView
+    private lateinit var imageView2: ImageView
+    private lateinit var imageView3: ImageView
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         startQRCodeScanner()
@@ -40,12 +53,6 @@ class Newtrip : AppCompatActivity() {
         scan_btn = findViewById(R.id.scanbtn)
         submit = findViewById(R.id.sub)
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.blue));
-
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
-        val colorBlueLight = ContextCompat.getColor(this,R.color.darkgrey)
-        val colorBlueDark = ContextCompat.getColor(this, R.color.blue)
-        bottomNavigationView.setBackgroundColor(colorBlueDark)
-        bottomNavigationView.itemActiveIndicatorColor = ColorStateList.valueOf(colorBlueLight)
 
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
         val receivedUsername: String? = sharedPreferences.getString("username", null)
@@ -70,18 +77,41 @@ class Newtrip : AppCompatActivity() {
 
         username = findViewById(R.id.username)
         scan = findViewById(R.id.autocomplete_text)
-        bottomNavigationView.selectedItemId = R.id.newtrip
-        bottomNavigationView.setOnItemSelectedListener { item ->
-            when (item.itemId) {
 
-                R.id.newtrip -> true
-                R.id.dashboard -> {
+        bottomNavigation = findViewById(R.id.bottomNavigation)
+        bottomNavigation.show(1, true)
+        bottomNavigation.add(MeowBottomNavigation.Model(1, R.drawable.baseline_qr_code_scanner_24))
+        bottomNavigation.add(MeowBottomNavigation.Model(2, R.drawable.baseline_list_24))
+        bottomNavigation.add(MeowBottomNavigation.Model(3, R.drawable.baseline_lock_reset_24))
+        meowNavigation()
+
+        scannerLayout = findViewById(R.id.scannerlayout)
+
+
+        // Schedule the background change every 2 seconds
+        val handler = Handler()
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+                // Repeat the task every 2 seconds
+                handler.postDelayed(this, 2000)
+            }
+        }, 2000) // Initial delay of 2 seconds
+    }
+
+
+    fun meowNavigation() {
+        bottomNavigation.setOnClickMenuListener { model ->
+            when (model.id) {
+                1 ->{
+                    true
+                }
+                2 -> {
                     startActivity(Intent(applicationContext, DashboardActivity::class.java))
                     finish()
                     true
                 }
 
-                R.id.edit -> {
+                3 -> {
                     startActivity(Intent(applicationContext, ChangePassword::class.java))
                     finish()
                     true

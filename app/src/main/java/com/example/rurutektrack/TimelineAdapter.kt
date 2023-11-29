@@ -22,9 +22,7 @@ class TimelineAdapter(private var timelineDataList: List<TimelineData>)
     : RecyclerView.Adapter<TimelineAdapter.RecycleViewHolder>() {
 
     class RecycleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val emp_id:TextView =itemView.findViewById(R.id.emp_id)
         val titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
-        val startTimeTextView: TextView = itemView.findViewById(R.id.startTimeTextView)
         val endTimeTextView: TextView = itemView.findViewById(R.id.endTimeTextView)
         val placeTextView: TextView = itemView.findViewById(R.id.placeTextView)
         val startKmTextView: TextView = itemView.findViewById(R.id.startKmTextView)
@@ -39,10 +37,8 @@ class TimelineAdapter(private var timelineDataList: List<TimelineData>)
 
     override fun onBindViewHolder(holder: RecycleViewHolder, position: Int) {
         val event = timelineDataList[position]
-        holder.emp_id.text=event.user
         holder.titleTextView.text = event.model
-        holder.startTimeTextView.text = event.start_time ?: "N/A"
-        holder.endTimeTextView.text = event.end_time ?: "N/A"
+        holder.endTimeTextView.text = event.end_time
         holder.placeTextView.text = event.place
         holder.startKmTextView.text = event.startkm
         holder.endKmTextView.text = event.endkm

@@ -1,20 +1,17 @@
 package com.example.rurutektrack
 
 import android.content.Intent
-import android.content.res.ColorStateList
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -32,6 +29,7 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var username: TextView
     private lateinit var trip: Button
     private var receivedusername: String? = null
+    private lateinit var bottomNavigation: MeowBottomNavigation
 
     private fun itemdev() {
         itemdev.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -42,11 +40,9 @@ class DashboardActivity : AppCompatActivity() {
             val intent = Intent(this@DashboardActivity,EndActivity::class.java)
             intent.putExtra("username", receivedusername)
             startActivity(intent)
-                    finish()
+            finish()
         }
     }
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
@@ -56,11 +52,22 @@ class DashboardActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
         receivedusername = sharedPreferences.getString("username", null)
 
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
-        val colorBlueLight = ContextCompat.getColor(this, R.color.darkgrey)
-        val colorBlueDark = ContextCompat.getColor(this, R.color.blue)
-        bottomNavigationView.setBackgroundColor(colorBlueDark)
-        bottomNavigationView.itemActiveIndicatorColor = ColorStateList.valueOf(colorBlueLight)
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("isLoggedIn", true)
+        editor.putString("userType", "user") // Change to "admin" for admin
+        editor.apply()
+
+        val isUserLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
+        if (!isUserLoggedIn) {
+            logout()
+        }
+
+        bottomNavigation = findViewById(R.id.bottomNavigation)
+        bottomNavigation.show(2, true)
+        bottomNavigation.add(MeowBottomNavigation.Model(1, R.drawable.baseline_qr_code_scanner_24))
+        bottomNavigation.add(MeowBottomNavigation.Model(2, R.drawable.baseline_list_24))
+        bottomNavigation.add(MeowBottomNavigation.Model(3, R.drawable.baseline_lock_reset_24))
+        meowNavigation()
 
         trip.setOnClickListener {
             logout()
@@ -74,7 +81,7 @@ class DashboardActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 fetchDataFromServer(it) { timelineData ->
                     // Update the UI with the fetched data here
-                  adapter.setData(timelineData)
+                    adapter.setData(timelineData)
                 }
             }
         }
@@ -85,27 +92,28 @@ class DashboardActivity : AppCompatActivity() {
 
         val itemDecoration = DividerItemDecoration(itemdev.context, DividerItemDecoration.VERTICAL)
         itemdev.addItemDecoration(itemDecoration)
-
-        bottomNavigationView.selectedItemId = R.id.dashboard
-        bottomNavigationView.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-
-                R.id.dashboard -> true
-                R.id.newtrip -> {
+    }
+    fun meowNavigation() {
+        bottomNavigation.setOnClickMenuListener { model ->
+            when (model.id) {
+                1 ->{
                     startActivity(Intent(applicationContext, Newtrip::class.java))
                     finish()
                     true
                 }
+                2 -> true
 
-                R.id.edit -> {
+                3 -> {
                     startActivity(Intent(applicationContext, ChangePassword::class.java))
                     finish()
                     true
                 }
+
                 else -> false
             }
         }
     }
+
     override fun onBackPressed() {
         // Navigate to the main screen when the back button is pressed
         val intent = Intent(this, Newtrip::class.java)
@@ -117,13 +125,11 @@ class DashboardActivity : AppCompatActivity() {
     private fun logout() {
         val sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        editor.remove("username") // Clear the username from SharedPreferences
+        editor.remove("isLoggedIn")
         editor.apply()
-
-        // Redirect to the UserLoginActivity
         val intent = Intent(this, Login::class.java)
         startActivity(intent)
-        finish() // Finish the current activity (MainActivity)
+        finish()
     }
     private suspend fun fetchDataFromServer(username: String, callback: (List<TimelineData>) -> Unit) {
         return withContext(Dispatchers.IO) {

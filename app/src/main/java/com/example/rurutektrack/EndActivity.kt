@@ -13,6 +13,7 @@ import android.graphics.Matrix
 import android.hardware.SensorManager.getOrientation
 import android.media.ExifInterface
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -24,11 +25,15 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.content.FileProvider
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -74,6 +79,7 @@ class EndActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_end)
@@ -85,12 +91,21 @@ class EndActivity : AppCompatActivity() {
         val intent = intent
         val startkm = intent.getStringExtra("startkm")
 
+        val colorStateList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.blue))
+        val InputLayout: TextInputLayout = findViewById(R.id.edit1)
+        InputLayout.boxStrokeColor = ContextCompat.getColor(this, R.color.blue)
+        InputLayout.placeholderTextColor= colorStateList
+        InputLayout.defaultHintTextColor=colorStateList
+        val InputLayout1: TextInputLayout = findViewById(R.id.edit2)
+        InputLayout1.boxStrokeColor = ContextCompat.getColor(this, R.color.blue)
+        InputLayout1.placeholderTextColor= colorStateList
+        InputLayout1.defaultHintTextColor=colorStateList
+        val InputLayout2: TextInputLayout = findViewById(R.id.edit3)
+        InputLayout2.boxStrokeColor = ContextCompat.getColor(this, R.color.blue)
+        InputLayout2.placeholderTextColor= colorStateList
+        InputLayout2.defaultHintTextColor=colorStateList
+
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.blue));
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
-        val colorBlueLight = ContextCompat.getColor(this, R.color.darkgrey)
-        val colorBlueDark = ContextCompat.getColor(this, R.color.blue)
-        bottomNavigationView.setBackgroundColor(colorBlueDark)
-        bottomNavigationView.itemActiveIndicatorColor = ColorStateList.valueOf(colorBlueLight)
         supportActionBar?.hide()
 
         plc = findViewById(R.id.place)
@@ -140,33 +155,8 @@ class EndActivity : AppCompatActivity() {
         endsave.setOnClickListener {
             isInputValid()
         }
-
-        bottomNavigationView.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-
-                R.id.dashboard -> {
-                    startActivity(Intent(applicationContext, DashboardActivity::class.java))
-                    finish()
-                    true
-                }
-
-                R.id.newtrip -> {
-                    startActivity(Intent(applicationContext, Newtrip::class.java))
-                    finish()
-                    true
-                }
-
-                R.id.edit -> {
-                    startActivity(Intent(applicationContext, ChangePassword::class.java))
-                    finish()
-                    true
-                }
-
-                else -> false
-            }
-        }
-
     }
+
     override fun onBackPressed() {
         // Navigate to the main screen when the back button is pressed
         val intent = Intent(this, DashboardActivity::class.java)

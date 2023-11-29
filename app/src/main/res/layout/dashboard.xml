@@ -3,25 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <ImageView
-        android:id="@+id/ImageView1"
-        android:layout_width="250dp"
-        android:layout_height="150dp"
-        android:visibility="visible"
-        android:layout_centerInParent="true"
-        android:src="@drawable/img_4"
-      />
-
-    <TextView
-        android:id="@+id/empty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        android:layout_below="@id/ImageView1"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/white"
-        android:text="No Data Found! Add a Trip"
-        android:textSize="16sp" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/recycler"
@@ -29,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:layout_marginBottom="5dp"
         android:layout_centerHorizontal="true"
         app:cardCornerRadius="20dp"
@@ -54,66 +35,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="hjgagfgfygfghhhhhhhhhhhhhhhh"
-            android:textSize="25sp"
-            android:textColor="@color/darkgrey"
+            android:textSize="24sp"
+            android:textColor="@color/white"
             android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <!-- EmpId Label -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:inputType="none"
-                    android:textColor="@color/white"
-                    android:text="EmpId :"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <!-- EmpId Value -->
-                <TextView
-                    android:id="@+id/emp_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:textColor="@color/white"
-                    android:text="EmpId Value Here"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <!-- Start-Time -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="5dp"
-                    android:inputType="none"
-                    android:text="Start-Time :"
-                    android:textColor="@color/white"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/startTimeTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/white"
-                    android:text="Start Time Value Here"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <!-- StartKm -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -140,36 +64,6 @@
                     android:text="StartKm Value Here"
                     android:textSize="20sp" />
             </LinearLayout>
-
-            <!-- End-Time -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="5dp"
-                    android:inputType="none"
-                    android:text="End-Time :"
-                    android:textColor="@color/white"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/endTimeTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/white"
-                    android:text="End Time Value Here"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <!-- EndKm -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -224,7 +118,32 @@
                     android:textColor="@color/white"
                     android:textSize="20sp" />
             </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:inputType="none"
+                android:text="Time :"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/endTimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:text="End Time Value Here"
+                android:textSize="20sp" />
+        </LinearLayout>
     </LinearLayout>   <!-- Other Views and Layouts (Continue as needed) -->
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

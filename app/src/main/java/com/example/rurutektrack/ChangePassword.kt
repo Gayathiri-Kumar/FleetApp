@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.lifecycleScope
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,6 +31,7 @@ class ChangePassword : AppCompatActivity() {
     private lateinit var confirmPassword_ET: EditText
     private lateinit var username: TextView
     private lateinit var resetButton_BTN: Button
+    private lateinit var bottomNavigation: MeowBottomNavigation
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,12 +44,6 @@ class ChangePassword : AppCompatActivity() {
         confirmPassword_ET = findViewById(R.id.renew)
         resetButton_BTN = findViewById(R.id.changesave)
         username = findViewById(R.id.model)
-
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
-        val colorBlueLight = ContextCompat.getColor(this, R.color.darkgrey)
-        val colorBlueDark = ContextCompat.getColor(this, R.color.blue)
-        bottomNavigationView.setBackgroundColor(colorBlueDark)
-        bottomNavigationView.itemActiveIndicatorColor = ColorStateList.valueOf(colorBlueLight)
 
         val sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
         val receivedUsername: String? = sharedPreferences.getString("username", null)
@@ -68,23 +64,32 @@ class ChangePassword : AppCompatActivity() {
                 }
             }
         }
+        bottomNavigation = findViewById(R.id.bottomNavigation)
+        bottomNavigation.show(3, true)
+        bottomNavigation.add(MeowBottomNavigation.Model(1, R.drawable.baseline_qr_code_scanner_24))
+        bottomNavigation.add(MeowBottomNavigation.Model(2, R.drawable.baseline_list_24))
+        bottomNavigation.add(MeowBottomNavigation.Model(3, R.drawable.baseline_lock_reset_24))
+        meowNavigation()
 
-        bottomNavigationView.selectedItemId = R.id.edit
-        bottomNavigationView.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-
-                R.id.edit -> true
-                R.id.newtrip -> {
+    }
+    fun meowNavigation() {
+        bottomNavigation.setOnClickMenuListener { model ->
+            when (model.id) {
+                1 ->{
                     startActivity(Intent(applicationContext, Newtrip::class.java))
                     finish()
                     true
                 }
-
-                R.id.dashboard -> {
+                2 -> {
                     startActivity(Intent(applicationContext, DashboardActivity::class.java))
                     finish()
                     true
                 }
+
+                3 -> {
+                    true
+                }
+
                 else -> false
             }
         }

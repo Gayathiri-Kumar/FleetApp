@@ -65,12 +65,6 @@ class Login : AppCompatActivity() {
                 }
             }
         }
-        if (isUserLoggedIn()) {
-            // User is already logged in, go to MainActivity
-            val intent = Intent(this, DashboardActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
     }
     override fun onBackPressed() {
         // Navigate to the main screen when the back button is pressed
@@ -79,10 +73,6 @@ class Login : AppCompatActivity() {
         startActivity(intent)
         finish()
         super.onBackPressed()
-    }
-    private fun isUserLoggedIn(): Boolean {
-        // Check the SharedPreferences to determine if the user is logged in
-        return sharedPreferences.getString("username", null) != null
     }
     override fun onResume() {
         super.onResume()
@@ -132,14 +122,28 @@ class Login : AppCompatActivity() {
                             val status = jsonResponse.getString("status")
 
                             if (status.trim() == "success") {
-                                val returnedUsername = jsonResponse.getString("emp_id")
+                                val returnedUsername = jsonResponse.getString("name")
                                 val sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
                                 val editor = sharedPreferences.edit()
                                 editor.putString("username", returnedUsername)
                                 editor.apply()
                                 runOnUiThread {
                                     val intent = Intent(this@Login, DashboardActivity::class.java)
-                                    intent.putExtra("emp_id", returnedUsername)
+                                    intent.putExtra("name", returnedUsername)
+                                    startActivity(intent)
+                                }
+                                val result = "Login Successful :)"
+                                return@withContext result
+                            }
+                           else if (status.trim() == "admin") {
+                                val returnedUsername = jsonResponse.getString("name")
+                                val sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
+                                val editor = sharedPreferences.edit()
+                                editor.putString("username", returnedUsername)
+                                editor.apply()
+                                runOnUiThread {
+                                    val intent = Intent(this@Login, Admin::class.java)
+                                    intent.putExtra("name", returnedUsername)
                                     startActivity(intent)
                                 }
                                 val result = "Login Successful :)"

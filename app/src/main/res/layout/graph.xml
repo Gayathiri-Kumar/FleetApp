@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Graphs">
+
+    <Spinner
+        android:id="@+id/vehicleSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="16dp"
+        android:entries="@array/vehicle_model"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Spinner
+        android:id="@+id/monthSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="16dp"
+        android:entries="@array/months"
+        android:layout_below="@+id/vehicleSpinner"
+        app:layout_constraintHorizontal_bias="0.0"
+        tools:ignore="MissingConstraints" />
+
+
+        <Button
+            android:id="@+id/fetchDataButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/monthSpinner"
+            android:backgroundTint="@color/skyblue"
+            android:layout_marginTop="8dp"
+            android:text="Submit"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/barChart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        tools:layout_editor_absoluteX="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_below="@+id/fetchDataButton"
+        android:layout_marginBottom="16dp"
+        tools:layout_editor_absoluteY="100dp" />
+
+</RelativeLayout>

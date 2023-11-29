@@ -1,185 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#595757">
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="180dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/img_1" />
-
-
-<!--    <TextView-->
-<!--        android:id="@+id/enduser"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        android:textColor="#FFFFFF"-->
-<!--        android:textSize="20dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.107"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/imageView" />-->
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/blue"
-        android:elevation="2dp"
-        app:itemIconSize="30dp"
-        app:itemIconTint="@color/white"
-        app:itemRippleColor="#000"
-        app:itemTextColor="@color/white"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="END TRIP"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <EditText
-        android:id="@+id/endkm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginTop="8dp"
-        android:hint="Enter End KM"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/place"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:hint="Enter Place"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/endkm"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/pasengers"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:textColor="@color/white"
-        android:hint="Enter Passengers Name"
-        android:textColorHint="@color/white"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/place"
-        tools:ignore="MissingConstraints" />
     <LinearLayout
         android:id="@+id/linear1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/pasengers" >
-        <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:text="Model"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pasengers" />
+        app:layout_constraintTop_toTopOf="parent"
+       >
 
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:textStyle="italic"
+            android:text="Hello "
+            android:textColor="#FFFFFF"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/user1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            app:layout_constraintStart_toEndOf="@+id/textView18"
+            app:layout_constraintTop_toBottomOf="@+id/model1" />
+    </LinearLayout>
     <TextView
         android:id="@+id/model1"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:text="Scooty Pept-TN 19 M 5906"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp"
-        app:layout_constraintStart_toEndOf="@+id/textView15"
-        app:layout_constraintTop_toBottomOf="@+id/pasengers" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/linear2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/linear1" >
-    <TextView
-        android:id="@+id/textView18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Scooty Pept-TN 19 M 5906"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="24dp"
+        android:layout_below="@+id/linear1" />
+    <com.google.android.material.textfield.TextInputLayout
+       style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+       android:id="@+id/edit1"
+        android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginStart="32dp"
-        android:text="Username"
-        android:layout_marginTop="8dp"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-    <TextView
-        android:id="@+id/user1"
-        android:layout_width="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_below="@+id/linear3">
+        <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/endkm"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="Enter End KM"
+        android:inputType="number"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="20dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:id="@+id/edit2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:text="TextView"
+        android:layout_below="@id/edit1"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp"
-        app:layout_constraintStart_toEndOf="@+id/textView18"
-        app:layout_constraintTop_toBottomOf="@+id/model1" />
-    </LinearLayout>
+        android:layout_marginEnd="32dp">
+        <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/place"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="Enter Destination"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="20dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:id="@+id/edit3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit2"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp">
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/pasengers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:hint="Enter Passengers Name"
+        android:textColorHint="@color/white"
+        android:textSize="20dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <LinearLayout
         android:id="@+id/linear3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/linear2" >
+        android:layout_below="@id/model1"
+     >
     <TextView
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
-        android:text="Start KM"
+        android:text="Entered Start Km : "
         android:textColor="#FFFFFF"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -189,7 +126,6 @@
         android:id="@+id/enterdstart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
         android:textColor="#FFFFFF"
@@ -199,45 +135,32 @@
     </LinearLayout>
     <ImageView
         android:id="@+id/opencamera"
-        android:layout_width="36dp"
-        android:layout_height="28dp"
+        android:layout_width="46dp"
+        android:layout_height="38dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.082"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linear3"
-        app:srcCompat="@drawable/baseline_camera_alt_24" />
+        android:layout_marginStart="10dp"
+        android:layout_below="@id/edit3"
+        android:src="@drawable/baseline_camera_alt_24" />
 
     <ImageView
         android:id="@+id/endup"
         android:layout_width="match_parent"
-        android:layout_height="155dp"
+        android:layout_height="match_parent"
+        android:layout_above="@id/endsave"
+        android:layout_below="@id/opencamera"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/opencamera"
-        app:layout_constraintVertical_bias="0.0"
-       />
+        android:layout_marginEnd="32dp" />
 
     <Button
         android:id="@+id/endsave"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="10dp"
         android:backgroundTint="@color/blue"
         android:text="Submit"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:textColor="@color/white"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="@id/bottomNavigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/endup"
-        app:layout_constraintVertical_bias="0.0" />
+        android:textSize="22sp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
