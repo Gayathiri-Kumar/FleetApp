@@ -2,7 +2,9 @@ package com.example.rurutektrack
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +30,8 @@ class DashboardActivity : AppCompatActivity() {
     lateinit var adapter: TimelineAdapter
     private lateinit var username: TextView
     private lateinit var trip: Button
+    private lateinit var emptyImageView : ImageView
+    private lateinit var emptytext:TextView
     private var receivedusername: String? = null
     private lateinit var bottomNavigation: MeowBottomNavigation
 
@@ -82,16 +86,23 @@ class DashboardActivity : AppCompatActivity() {
                 fetchDataFromServer(it) { timelineData ->
                     // Update the UI with the fetched data here
                     adapter.setData(timelineData)
+                    val isListEmpty = timelineData.isEmpty()
+
+                    emptytext.visibility = if (isListEmpty) View.VISIBLE else View.GONE
+                    emptyImageView.visibility = if (isListEmpty) View.VISIBLE else View.GONE
+                    itemdev.visibility = if (isListEmpty) View.GONE else View.VISIBLE
                 }
             }
         }
-
+        emptyImageView = findViewById<ImageView>(R.id.image1)
+        emptytext = findViewById<TextView>(R.id.text1)
 
         itemdev = findViewById(R.id.itemdev)
         itemdev()
 
         val itemDecoration = DividerItemDecoration(itemdev.context, DividerItemDecoration.VERTICAL)
         itemdev.addItemDecoration(itemDecoration)
+
     }
     fun meowNavigation() {
         bottomNavigation.setOnClickMenuListener { model ->

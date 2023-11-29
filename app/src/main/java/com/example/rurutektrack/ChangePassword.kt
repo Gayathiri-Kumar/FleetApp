@@ -136,7 +136,7 @@ class ChangePassword : AppCompatActivity() {
 
         // Create a request body with the old and new passwords
         val requestBody = FormBody.Builder()
-            .add("emp_id", username)
+            .add("name", username)
             .add("new_password", newPassword)
             .add("old_password",oldpswd)
             .build()
